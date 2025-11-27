@@ -49,7 +49,7 @@ def strip_optimizer(ckpt_dir, epoch):
         ckpt_path = osp.join(ckpt_dir, '{}_ckpt.pt'.format(s))
         if not osp.exists(ckpt_path):
             continue
-        ckpt = torch.load(ckpt_path, map_location=torch.device('cpu'))
+        ckpt = torch.load(ckpt_path, map_location=torch.device('cpu'), weights_only=False)
         if ckpt.get('ema'):
             ckpt['model'] = ckpt['ema']  # replace model with ema
         for k in ['optimizer', 'ema', 'updates']:  # keys
